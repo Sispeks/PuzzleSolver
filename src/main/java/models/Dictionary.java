@@ -1,20 +1,19 @@
 package models;
 
 import java.util.Collection;
-import java.util.Dictionary;
 import java.util.HashMap;
 
 /**
- * Created by felixhoffmann on 26.03.17.
+ * Created by felixhoffmann on 27.03.17.
  */
-public class Distionary {
+public class Dictionary {
     private String languageLong;
     private String languageShort;
     private HashMap<String,Integer> wordList;
     private final boolean substituteSpecialCharacters;
     //constructors
-    public Dictionary() {
-
+    public Dictionary(String filename) {
+        this.substituteSpecialCharacters = true;
     }
 
     //getters and setters
@@ -28,9 +27,12 @@ public class Distionary {
     public void setWordList(HashMap<String,Integer>) {this.wordList = wordList;}
 
     // real methods
-    public HashMap<String,Integer> getAllWordsOfLength(int n) {
-        Collection<Integer> c = this.wordList.values();
+    public HashMap<String,Integer> getAllWordsOfLength(Integer n) {
+        HashMap<String,Integer> result = new HashMap<String, Integer>(this.wordList);
+        Collection<Integer> c = result.values();
         c.remove(n);
-        return this.wordList.values().removeAll(c);
+        System.out.println(c.toString());
+        result.values().removeAll(c);
+        return result;
     }
 }
