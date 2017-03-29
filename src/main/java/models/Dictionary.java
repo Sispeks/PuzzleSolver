@@ -56,4 +56,32 @@ public class Dictionary {
             ioe.printStackTrace();
         }
     }
+
+    /**
+     * This method takes in constraints on the word, by already knowing some letters and the length,
+     * e.g. return all four letter words starting 'f' and ending with 'ck'
+     * @param n
+     * @return
+     */
+    public HashMap<String,Integer> getAllWordsContraint(HashMap<Integer,Character> constraints, int n) {
+        HashMap<String,Integer> result = new HashMap<String,Integer>();
+        for (String word : this.wordList.keySet()) {
+            if (word.length() == n ) {
+                boolean matchingConstraints = true;
+                char[] chars = word.toCharArray();
+                for (Integer position : constraints.keySet()) {
+                    if (chars[position] != constraints.get(position)) {
+                        matchingConstraints = false;
+                        continue;
+                    }
+                }
+                if (matchingConstraints) {
+                    result.put(word,n);
+                }
+
+            }
+        }
+        return result;
+    }
+
 }
