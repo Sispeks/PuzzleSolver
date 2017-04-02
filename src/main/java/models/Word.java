@@ -40,6 +40,8 @@ public class Word {
      * @return
      */
     public Set<Word> getSolutions() {
+        
+        return new Set<Word>();
 
     }
 }

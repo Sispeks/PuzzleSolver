@@ -35,4 +35,20 @@ public class Dictionary {
         result.values().removeAll(c);
         return result;
     }
+    public HashMap<String,Integer> getAllWordsMatching(HashMap<Integer,Character> constraints, int n) {
+        HashMap<String,Integer> smallerSet = this.getAllWordsOfLength(n);
+
+        for (String possibleResult : smallerSet.keySet()) {
+            boolean match = true;
+            for (int place : constraints.keySet()) {
+                if (possibleResult.charAt(place) != constraints.get(place)) {
+                    match = false;
+                }
+            }
+            if (!match) {
+                smallerSet.remove(possibleResult);
+            }
+        }
+        return smallerSet;
+    }
 }
