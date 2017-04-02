@@ -1,5 +1,6 @@
 package models;
 
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,14 +11,28 @@ import java.util.HashMap;
 
 /**
  * Created by felixhoffmann on 26.03.17.
+
+import java.util.Collection;
+import java.util.HashMap;
+
+/**
+ * Created by felixhoffmann on 27.03.17.
+
  */
 public class Dictionary {
     private String languageLong;
     private String languageShort;
     private HashMap<String,Integer> wordList;
+
     private final boolean substituteSpecialCharacters = true;
     //constructors
     public Dictionary() {
+
+
+    private final boolean substituteSpecialCharacters;
+    //constructors
+    public Dictionary(String filename) {
+        this.substituteSpecialCharacters = true;
 
     }
 
@@ -32,6 +47,7 @@ public class Dictionary {
     public void setWordList(HashMap<String,Integer> wordList) {this.wordList = wordList;}
 
     // real methods
+
     public HashMap<String,Integer> getAllWordsOfLength(int n) {
         HashMap<String,Integer> result = new HashMap<String,Integer>();
         for (String word : this.wordList.keySet()) {
@@ -82,6 +98,32 @@ public class Dictionary {
             }
         }
         return result;
+    }
+
+
+    public HashMap<String,Integer> getAllWordsOfLength(Integer n) {
+        HashMap<String,Integer> result = new HashMap<String, Integer>(this.wordList);
+        Collection<Integer> c = result.values();
+        c.remove(n);
+        System.out.println(c.toString());
+        result.values().removeAll(c);
+        return result;
+    }
+    public HashMap<String,Integer> getAllWordsMatching(HashMap<Integer,Character> constraints, int n) {
+        HashMap<String,Integer> smallerSet = this.getAllWordsOfLength(n);
+
+        for (String possibleResult : smallerSet.keySet()) {
+            boolean match = true;
+            for (int place : constraints.keySet()) {
+                if (possibleResult.charAt(place) != constraints.get(place)) {
+                    match = false;
+                }
+            }
+            if (!match) {
+                smallerSet.remove(possibleResult);
+            }
+        }
+        return smallerSet;
     }
 
 }
