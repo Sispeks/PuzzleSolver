@@ -24,7 +24,7 @@ public class Dictionary {
     public void setLanguageShort(String languageShort) {this.languageShort = languageShort;}
 
     public HashMap<String,Integer> getWordList(){return this.wordList;}
-    public void setWordList(HashMap<String,Integer>) {this.wordList = wordList;}
+    public void setWordList(HashMap<String,Integer> wordList) {this.wordList = wordList;}
 
     // real methods
     public HashMap<String,Integer> getAllWordsOfLength(Integer n) {
