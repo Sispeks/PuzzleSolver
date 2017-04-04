@@ -1,6 +1,9 @@
 package models;
 
 
+import jdk.nashorn.internal.objects.annotations.Getter;
+
+import javax.ws.rs.Consumes;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,20 +22,23 @@ import java.util.HashMap;
  * Created by felixhoffmann on 27.03.17.
 
  */
-public class Dictionary {
+
+@Consumes
+public class WordList {
     private String languageLong;
     private String languageShort;
     private HashMap<String,Integer> wordList;
 
-    private final boolean substituteSpecialCharacters = true;
+    private boolean substituteSpecialCharacters = true;
     //constructors
-    public Dictionary() {
+    public WordList() {}
 
 
-    private final boolean substituteSpecialCharacters;
+
     //constructors
-    public Dictionary(String filename) {
+    public WordList(String filename) {
         this.substituteSpecialCharacters = true;
+
 
     }
 
